@@ -48,5 +48,5 @@ tasks.named('test') {
 
 generateJava {
 	schemaPaths = ['src/main/resources/schema/schema.graphqls']
-	packageName = 'com.practice.latest_tech_stack.generated'
+	packageName = 'com.practice.LLTS_employee.generated'
 }

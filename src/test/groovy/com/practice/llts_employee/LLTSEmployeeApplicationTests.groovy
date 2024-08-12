@@ -1,4 +1,4 @@
-package com.practice.latest_tech_stack
+package com.practice.llts_employee
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext
 import spock.lang.Specification
 
 @SpringBootTest
-class LatestTechStackApplicationTests extends Specification {
+class LLTSEmployeeApplicationTests extends Specification {
 
     @Autowired
     ApplicationContext applicationContext

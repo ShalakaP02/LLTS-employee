@@ -1,4 +1,4 @@
-package com.practice.latest_tech_stack;
+package com.practice.llts_employee;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

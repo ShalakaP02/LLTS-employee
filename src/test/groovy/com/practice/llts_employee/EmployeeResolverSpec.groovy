@@ -1,9 +1,9 @@
-package com.practice.latest_tech_stack
+package com.practice.llts_employee
 
 import com.netflix.graphql.dgs.DgsQueryExecutor
 import org.springframework.beans.factory.annotation.Autowired
 
-class EmployeeResolverSpec extends LatestTechStackApplicationTests{
+class EmployeeResolverSpec extends LLTSEmployeeApplicationTests{
 
     @Autowired
     DgsQueryExecutor dgsQueryExecutor

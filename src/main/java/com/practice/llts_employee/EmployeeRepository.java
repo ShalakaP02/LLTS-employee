@@ -1,4 +1,4 @@
-package com.practice.latest_tech_stack;
+package com.practice.llts_employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

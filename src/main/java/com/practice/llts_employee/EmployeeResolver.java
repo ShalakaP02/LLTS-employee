@@ -1,4 +1,4 @@
-package com.practice.latest_tech_stack;
+package com.practice.llts_employee;
 
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;

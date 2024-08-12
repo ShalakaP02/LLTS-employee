@@ -1,13 +1,13 @@
-package com.practice.latest_tech_stack;
+package com.practice.llts_employee;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LatestTechStackApplication {
+public class LLTSEmployeeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LatestTechStackApplication.class, args);
+		SpringApplication.run(LLTSEmployeeApplication.class, args);
 	}
 
 }
