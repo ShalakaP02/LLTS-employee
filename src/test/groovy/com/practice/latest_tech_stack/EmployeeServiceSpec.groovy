@@ -26,13 +26,13 @@ class EmployeeServiceSpec extends LatestTechStackApplicationTests {
         when:
         def result = dgsQueryExecutor.executeAndExtractJsonPath('''
             {
-                employees {
+                getAllEmployees {
                     id
                     name
                     position
                 }
             }
-        ''', 'data.employees')
+        ''', 'data.getAllEmployees')
 
         then:
         result.size() == 2
@@ -54,13 +54,13 @@ class EmployeeServiceSpec extends LatestTechStackApplicationTests {
 
         def listResult = dgsQueryExecutor.executeAndExtractJsonPath('''
             {
-                employees {
+                getAllEmployees {
                     id
                     name
                     position
                 }
             }
-        ''', 'data.employees')
+        ''', 'data.getAllEmployees')
 
         then:
         deleteResult == true

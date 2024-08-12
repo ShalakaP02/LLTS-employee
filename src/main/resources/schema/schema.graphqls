@@ -5,8 +5,8 @@ type Employee {
 }
 
 type Query {
-    employees: [Employee!]!
-    employee(id: ID!): Employee
+    getAllEmployees: [Employee!]!
+    getEmployeeById(id: ID!): Employee
 }
 
 type Mutation {

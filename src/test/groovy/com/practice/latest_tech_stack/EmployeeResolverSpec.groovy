@@ -12,13 +12,13 @@ class EmployeeResolverSpec extends LatestTechStackApplicationTests{
         when:
         def result = dgsQueryExecutor.executeAndExtractJsonPath('''
             {
-                employees {
+                getAllEmployees {
                     id
                     name
                     position
                 }
             }
-        ''', 'data.employees')
+        ''', 'data.getAllEmployees')
 
         then:
         result == []

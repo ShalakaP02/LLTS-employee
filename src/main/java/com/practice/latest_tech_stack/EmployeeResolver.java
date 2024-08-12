@@ -15,12 +15,12 @@ public class EmployeeResolver {
         this.employeeService = employeeService;
     }
 
-    @DgsQuery(field = "employees")
+    @DgsQuery(field = "getAllEmployees")
     public List<Employee> getEmployees() {
         return employeeService.getAllEmployees();
     }
 
-    @DgsQuery(field = "employee")
+    @DgsQuery(field = "getEmployeeById")
     public Employee getEmployee(Long id) {
         return employeeService.getEmployeeById(id);
     }
