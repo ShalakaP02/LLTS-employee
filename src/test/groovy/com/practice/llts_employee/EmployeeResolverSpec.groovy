@@ -3,6 +3,7 @@ package com.practice.llts_employee
 import com.netflix.graphql.dgs.DgsQueryExecutor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 
 
 class EmployeeResolverSpec extends LLTSEmployeeApplicationTests{
@@ -15,6 +16,9 @@ class EmployeeResolverSpec extends LLTSEmployeeApplicationTests{
 
     @Autowired
     EmployeeService employeeService;
+
+    @MockBean
+    EmployeePaymentService employeePaymentService;
 
     def setup() {
         // Clear the database before each test

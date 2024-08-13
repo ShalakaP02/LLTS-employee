@@ -1,15 +1,15 @@
 package com.practice.llts_employee
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate
+
 import spock.lang.Subject
 
 class EmployeeServiceSpec extends LLTSEmployeeApplicationTests {
 
     def employeeRepository = Mock(EmployeeRepository)
-    def rabbitTemplate = Mock(RabbitTemplate)
+    def employeePaymentService = Mock(EmployeePaymentService)
 
     @Subject
-    EmployeeService employeeService = new EmployeeService(rabbitTemplate, employeeRepository)
+    EmployeeService employeeService = new EmployeeService(employeeRepository,employeePaymentService)
 
 
     def setup() {
@@ -45,7 +45,7 @@ class EmployeeServiceSpec extends LLTSEmployeeApplicationTests {
         1 * employeeRepository.save({ it.name == name && it.position == position }) >> savedEmployee
 
         and: "a message is sent to RabbitMQ"
-        1 * rabbitTemplate.convertAndSend("employee-payment-exchange", "employee.payment.created", 1L)
+        1 * employeePaymentService.sendEmployeeForPayment( 1L)
 
         and: "the method returns the saved employee"
         result == savedEmployee
