@@ -1,16 +1,23 @@
 package com.practice.llts_employee;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class EmployeeService {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final RabbitTemplate rabbitTemplate;
+    private final EmployeeRepository employeeRepository;
+
+
+    Logger log = LoggerFactory.getLogger(EmployeeService.class);
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
@@ -24,14 +31,25 @@ public class EmployeeService {
         Employee employee = new Employee();
         employee.setName(name);
         employee.setPosition(position);
-        return employeeRepository.save(employee);
+        Employee newEmp = employeeRepository.save(employee);
+        sendEmployeePaymentMessage(newEmp.getId());
+        return newEmp;
     }
 
     public boolean deleteEmployee(Long id) {
+        log.info("Checking if employee exists with ID: {}", id);
         if (employeeRepository.existsById(id)) {
+            log.info("Employee exists, deleting...");
             employeeRepository.deleteById(id);
             return true;
         }
+        log.info("Employee does not exist, nothing to delete.");
         return false;
+    }
+
+
+    public void sendEmployeePaymentMessage(Long employeeId) {
+        rabbitTemplate.convertAndSend("employee-payment-exchange", "employee.payment.created", employeeId);
+        log.info("Employee payment message sent to employee: {}", employeeId);
     }
 }
