@@ -26,7 +26,7 @@ public class EmployeePaymentService {
         logg.info("Employee payment message sent to employee: {}", employeeId);
     }
 
-    @RabbitListener(queues = QUEUE_NAME)
+    //@RabbitListener(queues = QUEUE_NAME)
     public void receivePaymentStatusMessage(Message message) {
         logg.info("####### Employee payment message received: {} ######", message);
         // Extract headers
