@@ -4,7 +4,6 @@ package com.practice.llts_employee;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +12,11 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    private final RabbitTemplate rabbitTemplate;
+
     private final EmployeeRepository employeeRepository;
+    private final EmployeePaymentService employeePaymentService;
 
-
-    Logger log = LoggerFactory.getLogger(EmployeeService.class);
+    private static final Logger log = LoggerFactory.getLogger(EmployeeService.class);
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
@@ -32,7 +31,7 @@ public class EmployeeService {
         employee.setName(name);
         employee.setPosition(position);
         Employee newEmp = employeeRepository.save(employee);
-        sendEmployeePaymentMessage(newEmp.getId());
+        employeePaymentService.sendEmployeeForPayment(newEmp.getId());
         return newEmp;
     }
 
@@ -48,8 +47,4 @@ public class EmployeeService {
     }
 
 
-    public void sendEmployeePaymentMessage(Long employeeId) {
-        rabbitTemplate.convertAndSend("employee-payment-exchange", "employee.payment.created", employeeId);
-        log.info("Employee payment message sent to employee: {}", employeeId);
-    }
 }
